@@ -75,42 +75,50 @@ class _DialogBoxState extends State<DialogBox> {
                     textAlign: TextAlign.center,
                   ),
               divide14,
-              RoundedButton(
-                width: double.infinity,
-                text: widget.onOkText != null
-                    ? '${widget.onOkText}'
-                    : LocaleKeys.core_ok,
-                press: widget.onOkTap ??
-                    () {
-                      Navigator.pop(context);
-                    },
-                borderColor: widget.okBakcgroundColor ?? Pallete.primary,
-                color: widget.enableCancel
-                    ? widget.okBakcgroundColor ?? Pallete.primary
-                    : widget.isOkPrimary
-                        ? widget.okBakcgroundColor ?? Pallete.primary
-                        : Colors.white,
-                textColor: widget.enableCancel
-                    ? Colors.white
-                    : widget.isOkPrimary
-                        ? Colors.white
-                        : Pallete.primary,
+              Row(
+                children: [
+                  if (widget.enableCancel)
+                    Flexible(
+                      child: RoundedButton(
+                        width: double.infinity,
+                        text: widget.onCancelText != null
+                            ? '${widget.onCancelText}'
+                            : LocaleKeys.core_cancel,
+                        press: widget.onCancelTap ??
+                            () {
+                              Navigator.pop(context);
+                            },
+                        borderColor: Colors.white,
+                        color: Colors.white,
+                        textColor: Colors.black,
+                      ),
+                    ),
+                  if (widget.enableCancel) divideW10,
+                  Flexible(
+                    child: RoundedButton(
+                      width: double.infinity,
+                      text: widget.onOkText != null
+                          ? '${widget.onOkText}'
+                          : LocaleKeys.core_ok,
+                      press: widget.onOkTap ??
+                          () {
+                            Navigator.pop(context);
+                          },
+                      borderColor: widget.okBakcgroundColor ?? Pallete.primary,
+                      color: widget.enableCancel
+                          ? widget.okBakcgroundColor ?? Pallete.primary
+                          : widget.isOkPrimary
+                              ? widget.okBakcgroundColor ?? Pallete.primary
+                              : Colors.white,
+                      textColor: widget.enableCancel
+                          ? Colors.white
+                          : widget.isOkPrimary
+                              ? Colors.white
+                              : Pallete.primary,
+                    ),
+                  ),
+                ],
               ),
-              if (widget.enableCancel) divide10,
-              if (widget.enableCancel)
-                RoundedButton(
-                  width: double.infinity,
-                  text: widget.onCancelText != null
-                      ? '${widget.onCancelText}'
-                      : LocaleKeys.core_cancel,
-                  press: widget.onCancelTap ??
-                      () {
-                        Navigator.pop(context);
-                      },
-                  borderColor: Colors.white,
-                  color: Colors.white,
-                  textColor: Colors.black,
-                )
             ],
           ),
         ),

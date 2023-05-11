@@ -39,19 +39,6 @@ class GetUserAccountListEmptyState extends AccountState {
   GetUserAccountListEmptyState(this.message, this.data);
 }
 
-class DeleteUserAccountLoadingState extends AccountState {
-  DeleteUserAccountLoadingState();
-}
-
-class DeleteUserAccountLoadedState extends AccountState {
-  DeleteUserAccountLoadedState();
-}
-
-class DeleteUserAccountErrorState extends AccountState {
-  final String message;
-  DeleteUserAccountErrorState(this.message);
-}
-
 class PostChangePasswordLoadingState extends AccountState {
   PostChangePasswordLoadingState();
 }
@@ -88,4 +75,23 @@ class PostUpdatePhoneErrorState extends AccountState {
 class PostUpdatePhoneFailedState extends AccountState {
   final String message;
   PostUpdatePhoneFailedState(this.message);
+}
+
+class PostDeleteUserLoadingState extends AccountState {
+  PostDeleteUserLoadingState();
+}
+
+class PostDeleteUserLoadedState extends AccountState {
+  final Response data;
+  PostDeleteUserLoadedState(this.data);
+}
+
+class PostDeleteUserErrorState extends AccountState {
+  final String message;
+  PostDeleteUserErrorState(this.message);
+}
+
+class PostDeleteUserFailedState extends AccountState {
+  final String message;
+  PostDeleteUserFailedState(this.message);
 }

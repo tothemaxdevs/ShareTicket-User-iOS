@@ -16,6 +16,7 @@ import 'package:shareticket/modules/account/screen/change_password_screen.dart';
 import 'package:shareticket/modules/account/screen/profile_detail_screen.dart';
 import 'package:shareticket/modules/account/screen/tos_privacy_screen.dart';
 import 'package:shareticket/modules/home/screen/add_phone_screen.dart';
+import 'package:shareticket/utils/font/iconly_icons.dart';
 import 'package:shareticket/utils/services/local_storage_service.dart';
 import 'package:shareticket/utils/view/view_utils.dart';
 import 'package:shareticket/widget/shimmer/shimmer.dart';
@@ -104,8 +105,8 @@ class _AccountScreenState extends State<AccountScreen> {
                 children: [
                   const SvgUI(
                     'ic_profile_blank.svg',
-                    width: 60,
-                    height: 60,
+                    width: 46,
+                    height: 46,
                   ),
 
                   // CircleAvatars(
@@ -134,15 +135,15 @@ class _AccountScreenState extends State<AccountScreen> {
                           maxLines: 1,
                           ellipsed: true,
                         ),
-                        divide2,
-                        TextWidget(
-                          data.user!.phone ?? 'Nomor hp belum ditambahkan',
-                          weight: FontWeight.w500,
-                          textColor: Colors.grey,
-                          size: TextWidgetSize.h7,
-                          maxLines: 1,
-                          ellipsed: true,
-                        ),
+                        // divide2,
+                        // TextWidget(
+                        //   data.user!.phone ?? 'Nomor hp belum ditambahkan',
+                        //   weight: FontWeight.w500,
+                        //   textColor: Colors.grey,
+                        //   size: TextWidgetSize.h7,
+                        //   maxLines: 1,
+                        //   ellipsed: true,
+                        // ),
                       ],
                     ),
                   ),
@@ -151,7 +152,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         Navigator.pushNamed(context, ProfileDetailScreen.path,
                             arguments: ProfileDetailArgument(data));
                       },
-                      icon: Icon(Icons.more_horiz))
+                      icon: Icon(Iconly.setting))
                 ],
               ),
             ),

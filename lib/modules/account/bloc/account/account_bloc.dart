@@ -21,9 +21,11 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
         super(AccountBlocInitial()) {
     on<GetAccountEvent>(_getMe);
     on<GetUserAccountListEvent>(_getUserList);
-    on<DeleteUserEvent>(_onDeleteUser);
+    // on<DeleteUserEvent>(_onDeleteUser);
     on<ChangePasswordEvent>(_onChangePassword);
     on<UpdatePhoneEvent>(_onUpdatePhone);
+
+    on<PostDeleteUserEvent>(_onPostDeleteUser);
   }
 
   _getMe(GetAccountEvent event, Emitter<AccountState> emit) async {
@@ -41,22 +43,23 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     }
   }
 
-  // _onLoadFeed(GetFeedEvent event, Emitter<FeedState> emit) async {
-  //   emit(FeedLoadingState());
-  //   try {
-  //     final data = await _api.getPost();
-  //     FeedResult _feed = FeedResult.fromJson(data.data);
-  //     if (_feed.post!.length != 0) {
-  //       print('loaded');
-  //       emit(FeedLoadedState(_feed));
-  //     } else {
-  //       print('empty');
-  //       emit(FeedEmptyState('Feed Kosong', _feed));
-  //     }
-  //   } on DioError catch (error) {
-  //     emit(FeedErrorState("${error.message}"));
-  //   }
-  // }
+  _onPostDeleteUser(
+      PostDeleteUserEvent event, Emitter<AccountState> emit) async {
+    emit(PostDeleteUserLoadingState());
+    try {
+      Response data = await _accountApi.postDeleteUser(body: event.body);
+      if (data.statusCode == 200) {
+        log('loaded');
+        log(data.data.toString());
+        emit(PostDeleteUserLoadedState(data));
+      } else {
+        log('Failed');
+        emit(PostDeleteUserFailedState('Failed to delete account'));
+      }
+    } on DioError catch (error) {
+      emit(PostDeleteUserErrorState(error.message));
+    }
+  }
 
   _getUserList(
       GetUserAccountListEvent event, Emitter<AccountState> emit) async {
@@ -76,18 +79,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
       }
     } on DioError catch (error) {
       emit(GetUserAccountListErrorState(error.message));
-    }
-  }
-
-  _onDeleteUser(DeleteUserEvent event, Emitter<AccountState> emit) async {
-    emit(DeleteUserAccountLoadingState());
-    try {
-      final data = await _accountApi.deleteUser(
-        id: event.userId,
-      );
-      emit(DeleteUserAccountLoadedState());
-    } on DioError catch (error) {
-      emit(DeleteUserAccountErrorState(error.message));
     }
   }
 

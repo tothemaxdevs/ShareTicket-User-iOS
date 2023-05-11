@@ -13,6 +13,7 @@ class AccountApi {
   static const String user = 'users';
   static const String changePassword = 'api/change-password';
   static const String updatePhone = 'api/update-phone';
+  static const String deleteUser = 'api/delete-account';
 
   Future<Response> getMe() async {
     Response response = await _apiService.get('$api$authMe');
@@ -24,8 +25,8 @@ class AccountApi {
     return response;
   }
 
-  Future<Response> deleteUser({id}) async {
-    Response response = await _apiService.delete('$api$user/$id');
+  Future<Response> postDeleteUser({body}) async {
+    Response response = await _apiService.post('$api$deleteUser', body);
     return response;
   }
 

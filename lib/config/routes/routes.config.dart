@@ -131,7 +131,8 @@ class RouteConfig {
         ));
 
       case DeleteConfirmationScreen.path:
-        return goTo(DeleteConfirmationScreen());
+        return goTo(DeleteConfirmationScreen(
+            argument: argument as DeleteConfirmationArgument));
       case ArticleScreen.path:
         return goTo(const ArticleScreen());
       case EventScreen.path:

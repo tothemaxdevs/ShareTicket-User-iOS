@@ -305,11 +305,14 @@ class EventWidget extends StatelessWidget {
                 ClipRRect(
                   borderRadius:
                       const BorderRadius.all(Radius.circular(Dimens.size10)),
-                  child: NetworkImagePlaceHolder(
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: 170,
-                      imageUrl: thumbnail),
+                  child: AspectRatio(
+                    aspectRatio: 2 / 1,
+                    child: NetworkImagePlaceHolder(
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        // height: 170,
+                        imageUrl: thumbnail),
+                  ),
                 ),
                 divide2,
                 Padding(

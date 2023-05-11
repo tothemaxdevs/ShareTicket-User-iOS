@@ -90,7 +90,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                         weight: FontWeight.w600,
                         textColor: Pallete.primary),
                     subtitle: TextWidget(
-                        widget.argument!.data.user!.phone ?? '-',
+                        widget.argument!.data.user!.phone ??
+                            'Nomor hp belum ditambahkan',
                         size: TextWidgetSize.h5,
                         textColor: Pallete.primary),
                   ),
@@ -108,7 +109,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
                   divideThick(height: 10.0),
                   InkWell(
                     onTap: () {
-                      confirmationDialog();
+                      confirmationDialog(widget.argument!.data.user!.id!);
                     },
                     child: Material(
                       color: Colors.transparent,
@@ -131,7 +132,7 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
         ));
   }
 
-  void confirmationDialog() {
+  void confirmationDialog(String userId) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -140,7 +141,8 @@ class _ProfileDetailScreenState extends State<ProfileDetailScreen> {
             descriptions: 'Apakah anda yakin ingin menghapus akun?',
             onOkTap: () {
               Navigator.pop(context);
-              Navigator.pushNamed(context, DeleteConfirmationScreen.path);
+              Navigator.pushNamed(context, DeleteConfirmationScreen.path,
+                  arguments: DeleteConfirmationArgument(id: userId));
             },
             enableCancel: true,
             okBakcgroundColor: Colors.red[700],
